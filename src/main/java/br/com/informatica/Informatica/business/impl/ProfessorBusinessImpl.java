@@ -41,14 +41,13 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
 
     @Override
     public Professor put(int id, Professor professor) {
-        professorRepository.findById(id)
-                .map(prof -> {
-                    prof.setId(id);
-                    prof.setNome(prof.getNome());
-                    return professorRepository.save(prof);
-                })
-                .orElse(() -> {
-                    return null;
-                });
+
+        Professor profe = professorRepository.findById(id).get();
+        if(profe == null) {
+            return null;
+        } else {
+            professor.setId(id);
+            return professorRepository.save(professor);
+        }
     }
 }
