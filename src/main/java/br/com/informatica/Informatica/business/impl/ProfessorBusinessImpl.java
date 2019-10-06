@@ -4,7 +4,6 @@ import br.com.informatica.Informatica.business.ProfessorBusiness;
 import br.com.informatica.Informatica.model.Professor;
 import br.com.informatica.Informatica.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +34,21 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     }
 
     @Override
-    public void deleteById(int id) {
+    public ResponseEntity<Professor> deleteById(int id) {
         professorRepository.deleteById(id);
+        return null;
     }
 
     @Override
     public Professor put(int id, Professor professor) {
 
-        Professor profe = professorRepository.findById(id).get();
-        if(profe == null) {
-            return null;
-        } else {
+        try {
+            Professor profe = professorRepository.findById(id).get();
             professor.setId(id);
             return professorRepository.save(professor);
+
+        } catch (Exception ex) {
+            return null;
         }
     }
 }

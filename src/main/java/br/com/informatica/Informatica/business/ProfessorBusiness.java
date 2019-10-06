@@ -9,6 +9,6 @@ public interface ProfessorBusiness {
     List<Professor> findAll();
     Professor findById(int id);
     Professor save(Professor professor);
-    void deleteById(int id);
+    ResponseEntity<Professor> deleteById(int id);
     Professor put(int id, Professor professor);
 }

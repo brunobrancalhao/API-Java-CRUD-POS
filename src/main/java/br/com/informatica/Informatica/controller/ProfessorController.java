@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/professores")
@@ -39,15 +38,21 @@ public class ProfessorController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        professorBusiness.deleteById(id);
+    public ResponseEntity<Professor> delete(@PathVariable int id) {
+        try {
+            return professorBusiness.deleteById(id);
+         } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Professor> put(@PathVariable int id, @RequestBody Professor professor) {
         Professor info = professorBusiness.put(id, professor);
+
         if(info == null) {
-            return (ResponseEntity<Professor>) ResponseEntity.status(HttpStatus.NOT_FOUND);
+            return (ResponseEntity<Professor>) ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(info);
         }
         return (ResponseEntity<Professor>) ResponseEntity
                 .status(HttpStatus.CREATED)
