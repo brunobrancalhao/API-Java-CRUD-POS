@@ -4,6 +4,8 @@ import br.com.informatica.Informatica.business.ProfessorBusiness;
 import br.com.informatica.Informatica.model.Professor;
 import br.com.informatica.Informatica.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,8 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     }
 
     @Override
-    public List<Professor> findAll() {
-        return professorRepository.findAll();
+    public Page<Professor> findAll(Pageable pageable) {
+        return professorRepository.findAll(pageable);
     }
 
     @Override
