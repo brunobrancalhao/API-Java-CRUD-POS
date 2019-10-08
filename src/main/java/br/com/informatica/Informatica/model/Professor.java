@@ -2,10 +2,11 @@ package br.com.informatica.Informatica.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "professor")
-public class Professor {
+public class Professor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,7 +14,18 @@ public class Professor {
     @Column
     private String nome;
 
+    @OneToMany(mappedBy = "professor")
+    private Set<Materia> materia;
+
     public Professor() {
+    }
+
+    public Set<Materia> getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Set<Materia> materia) {
+        this.materia = materia;
     }
 
     public int getId() {
