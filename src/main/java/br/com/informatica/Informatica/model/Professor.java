@@ -19,13 +19,9 @@ public class Professor implements Serializable {
 
     public Professor() {
     }
-
-    public Set<Materia> getMateria() {
-        return materia;
-    }
-
-    public void setMateria(Set<Materia> materia) {
-        this.materia = materia;
+    public Professor(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
     }
 
     public int getId() {

@@ -34,7 +34,12 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
 
     @Override
     public Materia save(Materia materia) {
-        return materiaRepository.save(materia);
+        try {
+            Professor prof = professorRepository.findById(materia.getProfessor().getId()).get();
+            return materiaRepository.save(materia);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Override

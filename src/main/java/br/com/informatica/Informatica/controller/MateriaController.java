@@ -38,10 +38,14 @@ public class MateriaController {
 
     @PostMapping
     public ResponseEntity<Materia> post(@RequestBody Materia materia) {
-
+        Materia info = materiaBusiness.save(materia);
+        if(info == null) {
+            return (ResponseEntity<Materia>) ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(info);
+        }
         return (ResponseEntity<Materia>) ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(materiaBusiness.save(materia));
+                .body(info);
     }
 
 

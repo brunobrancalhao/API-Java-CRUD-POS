@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 public interface MateriaBusiness {
     Page<Materia> findAll(Pageable pageable);
     Materia findById(int id);
-    Materia save(Materia professor);
+    Materia save(Materia materia);
     ResponseEntity<Materia> deleteById(int id);
-    Materia put(int id, Materia professor);
+    Materia put(int id, Materia materia);
 }

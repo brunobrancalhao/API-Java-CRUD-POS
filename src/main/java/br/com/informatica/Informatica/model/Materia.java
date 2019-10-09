@@ -13,7 +13,7 @@ public class Materia implements Serializable {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "professor_id", insertable = true, updatable = true, nullable = false)
+    @JoinColumn(name = "professor_id", nullable = false)
     private Professor professor;
 
     public Materia(){
