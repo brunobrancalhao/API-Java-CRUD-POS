@@ -48,6 +48,28 @@ public class MateriaController {
                 .body(info);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Materia> put(@PathVariable int id, @RequestBody Materia materia) {
+        Materia info = materiaBusiness.put(id, materia);
+
+        if(info == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(info);
+        }
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(info);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Materia> delete(@PathVariable int id) {
+        try {
+            return materiaBusiness.deleteById(id);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 
 
 

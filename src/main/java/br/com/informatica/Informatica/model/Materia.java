@@ -2,6 +2,7 @@ package br.com.informatica.Informatica.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "materia")
@@ -12,9 +13,12 @@ public class Materia implements Serializable {
     private int id;
     private String nome;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "professor_id", nullable = false)
     private Professor professor;
+
+    @ManyToMany(mappedBy = "materias")
+    private List<Curso> cursos;
 
     public Materia(){
 
@@ -48,4 +52,5 @@ public class Materia implements Serializable {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
 }

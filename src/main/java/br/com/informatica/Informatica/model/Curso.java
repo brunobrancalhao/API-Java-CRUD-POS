@@ -2,6 +2,7 @@ package br.com.informatica.Informatica.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "curso")
@@ -13,13 +14,11 @@ public class Curso implements Serializable {
     @Column
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "materia_id", nullable = false)
-    private Materia materia;
-
-    @OneToOne
-    @JoinColumn(name = "turma_id", nullable = false)
-    private Turma turma;
+    @ManyToMany
+    @JoinTable(name="aula",
+            joinColumns = @JoinColumn(name="curso_id"),
+            inverseJoinColumns = @JoinColumn(name="materia_id"))
+    private List<Materia> materias;
 
 
     public int getId() {
@@ -38,19 +37,11 @@ public class Curso implements Serializable {
         this.nome = nome;
     }
 
-    public Materia getMateria() {
-        return materia;
+    public List<Materia> getMaterias() {
+        return materias;
     }
 
-    public void setMateria(Materia materia) {
-        this.materia = materia;
-    }
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setMaterias(List<Materia> materias) {
+        this.materias = materias;
     }
 }

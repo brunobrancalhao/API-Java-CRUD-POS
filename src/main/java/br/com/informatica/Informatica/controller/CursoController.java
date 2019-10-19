@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/curso")
+@RequestMapping("/v1/cursos")
 public class CursoController {
     private CursoBusiness cursoBusiness;
 

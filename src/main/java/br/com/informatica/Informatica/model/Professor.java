@@ -14,8 +14,8 @@ public class Professor implements Serializable {
     @Column
     private String nome;
 
-    @OneToMany(mappedBy = "professor")
-    private Set<Materia> materia;
+    @OneToOne(mappedBy = "professor")
+    private Materia materia;
 
     public Professor() {
     }
