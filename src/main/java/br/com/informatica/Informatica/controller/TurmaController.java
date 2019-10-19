@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/turma")
+@RequestMapping("/v1/turmas")
 public class TurmaController {
     private TurmaBusiness turmaBusiness;
 
@@ -22,6 +22,7 @@ public class TurmaController {
 
     @GetMapping
     public ResponseEntity<Page<Turma>> findAll(@PageableDefault(size=10) Pageable pageable) {
+
         return ResponseEntity.ok().body(turmaBusiness.findAll(pageable));
     }
 
