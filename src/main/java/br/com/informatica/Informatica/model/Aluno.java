@@ -1,7 +1,10 @@
 package br.com.informatica.Informatica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "aluno")
@@ -12,17 +15,28 @@ public class Aluno implements Serializable {
     private int id;
     private String nome;
 
-    @OneToOne
-    @JoinColumn(name = "turma_id", nullable = false)
-    private Turma turma;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name="aluno_cursos",
+            joinColumns = @JoinColumn(name="aluno_id"),
+            inverseJoinColumns = @JoinColumn(name="turma_id"))
+    private List<Turma> turmas;
 
     public Aluno() {
     }
 
-    public Aluno(int id, String nome, Turma turma) {
+    public Aluno(int id, String nome, List<Turma> turmas) {
         this.id = id;
         this.nome = nome;
-        this.turma = turma;
+        this.turmas = turmas;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 
     public int getId() {
@@ -41,11 +55,4 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
 }

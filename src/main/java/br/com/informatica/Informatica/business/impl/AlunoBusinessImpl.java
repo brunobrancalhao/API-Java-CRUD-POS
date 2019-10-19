@@ -34,12 +34,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
 
     @Override
     public Aluno save(Aluno aluno) {
-        try {
-            Aluno alu = alunoRepository.findById(aluno.getTurma().getId()).get();
-            return alunoRepository.save(aluno);
-        } catch (Exception ex) {
-            return null;
-        }
+        return alunoRepository.save(aluno);
     }
 
     @Override

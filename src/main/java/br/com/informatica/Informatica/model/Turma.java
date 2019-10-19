@@ -2,9 +2,11 @@ package br.com.informatica.Informatica.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "turma")
@@ -20,6 +22,17 @@ public class Turma implements Serializable {
     @ManyToOne
     @JoinColumn(name="curso_id", nullable=false)
     private Curso curso;
+
+    @ManyToMany(mappedBy = "turmas")
+    private List<Aluno> alunos;
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
 
     public Turma() {
     }
