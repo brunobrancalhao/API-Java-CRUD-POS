@@ -15,7 +15,6 @@ public class Aluno implements Serializable {
     private int id;
     private String nome;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name="aluno_cursos",
             joinColumns = @JoinColumn(name="aluno_id"),
@@ -25,8 +24,7 @@ public class Aluno implements Serializable {
     public Aluno() {
     }
 
-    public Aluno(int id, String nome, List<Turma> turmas) {
-        this.id = id;
+    public Aluno(String nome, List<Turma> turmas) {
         this.nome = nome;
         this.turmas = turmas;
     }

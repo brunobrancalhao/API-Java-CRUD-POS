@@ -23,6 +23,7 @@ public class Turma implements Serializable {
     @JoinColumn(name="curso_id", nullable=false)
     private Curso curso;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "turmas")
     private List<Aluno> alunos;
 
