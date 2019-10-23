@@ -3,12 +3,15 @@ package br.com.informatica.Informatica.controller;
 import br.com.informatica.Informatica.business.AlunoBusiness;
 import br.com.informatica.Informatica.model.Aluno;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/alunos")
@@ -21,8 +24,13 @@ public class AlunoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Aluno>> findAll(@PageableDefault(size=10) Pageable pageable) {
-        return ResponseEntity.ok().body(alunoBusiness.findAll(pageable));
+    public ResponseEntity<Page<Aluno>> findAll(@PageableDefault(size=10) Pageable pageable, @RequestParam(required = false) String nome) {
+
+        if(nome != null){
+            return ResponseEntity.ok().body(alunoBusiness.findAllByNomeContains(pageable,nome));
+        } else {
+            return ResponseEntity.ok().body(alunoBusiness.findAll(pageable));
+        }
     }
 
     @GetMapping("/{id}")

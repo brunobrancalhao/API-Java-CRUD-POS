@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AlunoBusinessImpl implements AlunoBusiness {
 
@@ -25,6 +27,27 @@ public class AlunoBusinessImpl implements AlunoBusiness {
     @Override
     public Page<Aluno> findAll(Pageable pageable) {
         return alunoRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Aluno> findAllByNomeContains(Pageable pageable, String nome) {
+        return alunoRepository.findAllByNomeContains(pageable,nome);
+    }
+
+    public AlunoRepository getAlunoRepository() {
+        return alunoRepository;
+    }
+
+    public void setAlunoRepository(AlunoRepository alunoRepository) {
+        this.alunoRepository = alunoRepository;
+    }
+
+    public TurmaRepository getTurmaRepository() {
+        return turmaRepository;
+    }
+
+    public void setTurmaRepository(TurmaRepository turmaRepository) {
+        this.turmaRepository = turmaRepository;
     }
 
     @Override
