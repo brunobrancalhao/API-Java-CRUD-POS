@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.AlunoBusiness;
+import br.com.informatica.Informatica.exception.AlunoNotFoundException;
 import br.com.informatica.Informatica.model.Aluno;
 import br.com.informatica.Informatica.repository.AlunoRepository;
 import br.com.informatica.Informatica.repository.TurmaRepository;
@@ -52,7 +53,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
 
     @Override
     public Aluno findById(int id) {
-        return alunoRepository.findById(id).get();
+        return alunoRepository.findById(id).orElseThrow(() -> new AlunoNotFoundException(id));
     }
 
     @Override

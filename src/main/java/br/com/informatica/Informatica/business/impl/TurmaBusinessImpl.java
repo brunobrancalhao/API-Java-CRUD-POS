@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.TurmaBusiness;
+import br.com.informatica.Informatica.exception.TurmaNotFoundException;
 import br.com.informatica.Informatica.model.Turma;
 import br.com.informatica.Informatica.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
 
     @Override
     public Turma findById(int id) {
-        return turmaRepository.findById(id).get();
+        return turmaRepository.findById(id).orElseThrow(() -> new TurmaNotFoundException(id));
     }
 
     @Override

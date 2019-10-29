@@ -27,21 +27,14 @@ public class Turma implements Serializable {
     @ManyToMany(mappedBy = "turmas")
     private List<Aluno> alunos;
 
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
 
     public Turma() {
     }
 
-    public Turma(int id, String nome, Curso curso) {
-        this.id = id;
+    public Turma(String nome, Curso curso, List<Aluno> alunos) {
         this.nome = nome;
         this.curso = curso;
+        this.alunos = alunos;
     }
 
     public int getId() {
@@ -58,6 +51,14 @@ public class Turma implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
     public Curso getCurso() {
