@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.controller;
 
 import br.com.informatica.Informatica.business.MateriaBusiness;
+import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Materia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,10 +40,6 @@ public class MateriaController {
     @PostMapping
     public ResponseEntity<Materia> post(@RequestBody Materia materia) {
         Materia info = materiaBusiness.save(materia);
-        if(info == null) {
-            return (ResponseEntity<Materia>) ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(info);
-        }
         return (ResponseEntity<Materia>) ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(info);

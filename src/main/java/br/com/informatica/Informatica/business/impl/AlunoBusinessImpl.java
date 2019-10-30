@@ -1,8 +1,10 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.AlunoBusiness;
-import br.com.informatica.Informatica.exception.AlunoNotFoundException;
+import br.com.informatica.Informatica.exception.InvalidParamsException;
+import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Aluno;
+import br.com.informatica.Informatica.model.Turma;
 import br.com.informatica.Informatica.repository.AlunoRepository;
 import br.com.informatica.Informatica.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlunoBusinessImpl implements AlunoBusiness {
@@ -53,29 +55,56 @@ public class AlunoBusinessImpl implements AlunoBusiness {
 
     @Override
     public Aluno findById(int id) {
-        return alunoRepository.findById(id).orElseThrow(() -> new AlunoNotFoundException(id));
+        return alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Aluno id " + id + "não foi encontrado"));
     }
 
     @Override
     public Aluno save(Aluno aluno) {
+        if(aluno.getTurmas() == null){
+            throw new InvalidParamsException("Turmas são obrigatórias");
+        }
+
+        //Percorre todas as turmas e verifica se alguma não existe
+        for (Turma t : aluno.getTurmas()) {
+            Optional<Turma> ot = turmaRepository.findById(t.getId());
+
+            if (ot.equals(Optional.empty())) {
+                throw new NotFoundException("Turma id:" + t.getId() + " não existe");
+            }
+        }
+
         return alunoRepository.save(aluno);
     }
 
     @Override
-    public ResponseEntity<Aluno> deleteById(int id) {
+    public void deleteById(int id) {
+        alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Aluno id " + id + " não foi encontrado"));
         alunoRepository.deleteById(id);
-        return null;
+
     }
 
     @Override
     public Aluno put(int id, Aluno aluno) {
+        if(aluno.getTurmas() == null){
+            throw new InvalidParamsException("Turmas são obrigatórias");
+        }
+
+        //Percorre todas as turmas e verifica se alguma não existe
+        for (Turma t : aluno.getTurmas()) {
+            Optional<Turma> ot = turmaRepository.findById(t.getId());
+
+            if (ot.equals(Optional.empty())) {
+                throw new NotFoundException("Turma id:" + t.getId() + " não existe");
+            }
+        }
+
         try {
             Aluno alu = alunoRepository.findById(id).get();
             aluno.setId(id);
             return alunoRepository.save(aluno);
 
         } catch (Exception ex) {
-            return null;
+            throw new NotFoundException("Aluno id:" + id + " não existe");
         }
     }
 }

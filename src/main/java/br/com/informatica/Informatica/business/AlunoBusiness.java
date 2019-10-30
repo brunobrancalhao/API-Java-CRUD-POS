@@ -13,6 +13,6 @@ public interface AlunoBusiness {
     Page<Aluno> findAllByNomeContains(Pageable pageable, String name);
     Aluno findById(int id);
     Aluno save(Aluno aluno);
-    ResponseEntity<Aluno> deleteById(int id);
+    void deleteById(int id);
     Aluno put(int id, Aluno aluno);
 }

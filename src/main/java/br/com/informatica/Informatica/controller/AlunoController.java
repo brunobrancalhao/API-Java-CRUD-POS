@@ -37,20 +37,12 @@ public class AlunoController {
     public ResponseEntity<Aluno> find(@PathVariable int id) {
         Aluno alu = alunoBusiness.findById(id);
 
-        if (alu == null) {
-
-        }
-
         return ResponseEntity.ok().body(alunoBusiness.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Aluno> post(@RequestBody Aluno aluno) {
         Aluno info = alunoBusiness.save(aluno);
-        if(info == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(info);
-        }
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(info);
@@ -59,11 +51,6 @@ public class AlunoController {
     @PutMapping("/{id}")
     public ResponseEntity<Aluno> put(@PathVariable int id, @RequestBody Aluno aluno) {
         Aluno alu = alunoBusiness.put(id, aluno);
-
-        if(alu == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(alu);
-        }
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(alu);
@@ -71,11 +58,8 @@ public class AlunoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Aluno> delete(@PathVariable int id) {
-        try {
-            return alunoBusiness.deleteById(id);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        alunoBusiness.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

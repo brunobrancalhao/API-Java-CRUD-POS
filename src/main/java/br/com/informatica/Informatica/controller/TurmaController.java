@@ -42,11 +42,6 @@ public class TurmaController {
     @PutMapping("/{id}")
     public ResponseEntity<Turma> put(@PathVariable int id, @RequestBody Turma turma) {
         Turma info = turmaBusiness.put(id, turma);
-
-        if(info == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(info);
-        }
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(info);
@@ -55,10 +50,6 @@ public class TurmaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Turma> delete(@PathVariable int id) {
-        try {
-            return turmaBusiness.deleteById(id);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        return turmaBusiness.deleteById(id);
     }
 }

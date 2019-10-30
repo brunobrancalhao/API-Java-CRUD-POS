@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.MateriaBusiness;
+import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Materia;
 import br.com.informatica.Informatica.model.Professor;
 import br.com.informatica.Informatica.repository.MateriaRepository;
@@ -38,7 +39,7 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
             Professor prof = professorRepository.findById(materia.getProfessor().getId()).get();
             return materiaRepository.save(materia);
         } catch (Exception ex) {
-            return null;
+            throw new NotFoundException("Professor " + materia.getProfessor().getId() + " não encontrado");
         }
     }
 

@@ -1,7 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.TurmaBusiness;
-import br.com.informatica.Informatica.exception.TurmaNotFoundException;
+import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Turma;
 import br.com.informatica.Informatica.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
 
     @Override
     public Turma findById(int id) {
-        return turmaRepository.findById(id).orElseThrow(() -> new TurmaNotFoundException(id));
+        return turmaRepository.findById(id).orElseThrow(() -> new NotFoundException("Turma com id " + id + " Não foi encontrada"));
     }
 
     @Override
@@ -37,7 +37,11 @@ public class TurmaBusinessImpl implements TurmaBusiness {
 
     @Override
     public ResponseEntity<Turma> deleteById(int id) {
-        turmaRepository.deleteById(id);
+        try {
+            turmaRepository.deleteById(id);
+        } catch (Exception ex) {
+            throw new NotFoundException("Turma com o ID " + id + "Não encontrada");
+        }
         return null;
     }
 
@@ -49,7 +53,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
             return turmaRepository.save(turma);
 
         } catch (Exception ex) {
-            return null;
+            throw new NotFoundException("Turma com o ID " + id + "Não encontrada");
         }
     }
 

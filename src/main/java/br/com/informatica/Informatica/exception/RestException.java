@@ -13,9 +13,15 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class RestException {
 
-    @ExceptionHandler({AlunoNotFoundException.class,TurmaNotFoundException.class})
+    @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void springHandleNotFound(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.NOT_FOUND.value());
+    }
+
+    @ExceptionHandler({InvalidParamsException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void springHandle(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 }
