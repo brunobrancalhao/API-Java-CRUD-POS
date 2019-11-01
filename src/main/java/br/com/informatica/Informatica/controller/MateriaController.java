@@ -61,11 +61,8 @@ public class MateriaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Materia> delete(@PathVariable int id) {
-        try {
-            return materiaBusiness.deleteById(id);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        materiaBusiness.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 

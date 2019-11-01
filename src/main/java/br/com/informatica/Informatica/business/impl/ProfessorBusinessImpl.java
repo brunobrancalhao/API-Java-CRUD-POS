@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.ProfessorBusiness;
+import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Professor;
 import br.com.informatica.Informatica.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
 
     @Override
     public Professor findById(int id) {
-        return professorRepository.findById(id).get();
+        return professorRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Professor com ID " + id + " não foi encontrado!"));
     }
 
     @Override
@@ -36,9 +37,9 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     }
 
     @Override
-    public ResponseEntity<Professor> deleteById(int id) {
+    public void deleteById(int id) {
+        professorRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Professor com ID " + id + " não foi encontrado!"));
         professorRepository.deleteById(id);
-        return null;
     }
 
     @Override

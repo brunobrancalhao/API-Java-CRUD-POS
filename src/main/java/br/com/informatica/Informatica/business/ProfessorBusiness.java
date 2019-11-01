@@ -11,6 +11,6 @@ public interface ProfessorBusiness {
     Page<Professor> findAll(Pageable pageable);
     Professor findById(int id);
     Professor save(Professor professor);
-    ResponseEntity<Professor> deleteById(int id);
+    void deleteById(int id);
     Professor put(int id, Professor professor);
 }

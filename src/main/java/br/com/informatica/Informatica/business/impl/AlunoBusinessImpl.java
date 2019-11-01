@@ -55,13 +55,13 @@ public class AlunoBusinessImpl implements AlunoBusiness {
 
     @Override
     public Aluno findById(int id) {
-        return alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Aluno id " + id + "não foi encontrado"));
+        return alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Aluno com ID " + id + " não foi encontrado!"));
     }
 
     @Override
     public Aluno save(Aluno aluno) {
         if(aluno.getTurmas() == null){
-            throw new InvalidParamsException("Turmas são obrigatórias");
+            throw new InvalidParamsException("Erro: Turmas são obrigatórias!");
         }
 
         //Percorre todas as turmas e verifica se alguma não existe
@@ -69,7 +69,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
             Optional<Turma> ot = turmaRepository.findById(t.getId());
 
             if (ot.equals(Optional.empty())) {
-                throw new NotFoundException("Turma id:" + t.getId() + " não existe");
+                throw new NotFoundException("Erro: Turma com ID:" + t.getId() + " não existe!");
             }
         }
 
@@ -78,15 +78,14 @@ public class AlunoBusinessImpl implements AlunoBusiness {
 
     @Override
     public void deleteById(int id) {
-        alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Aluno id " + id + " não foi encontrado"));
+        alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Aluno com ID " + id + " não foi encontrado!"));
         alunoRepository.deleteById(id);
-
     }
 
     @Override
     public Aluno put(int id, Aluno aluno) {
         if(aluno.getTurmas() == null){
-            throw new InvalidParamsException("Turmas são obrigatórias");
+            throw new InvalidParamsException("Erro: Turmas são obrigatórias!");
         }
 
         //Percorre todas as turmas e verifica se alguma não existe
@@ -94,7 +93,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
             Optional<Turma> ot = turmaRepository.findById(t.getId());
 
             if (ot.equals(Optional.empty())) {
-                throw new NotFoundException("Turma id:" + t.getId() + " não existe");
+                throw new NotFoundException("Erro: Turma id: " + t.getId() + " não existe");
             }
         }
 

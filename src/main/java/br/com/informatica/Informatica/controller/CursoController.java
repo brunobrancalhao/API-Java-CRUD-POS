@@ -32,7 +32,6 @@ public class CursoController {
 
     @PostMapping
     public ResponseEntity<Curso> post(@RequestBody Curso curso) {
-
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(cursoBusiness.save(curso));
@@ -49,16 +48,11 @@ public class CursoController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(info);
-
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Curso> delete(@PathVariable int id) {
-        try {
-            return cursoBusiness.deleteById(id);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        cursoBusiness.deleteById(id);
+        return ResponseEntity.ok().build();
     }
-
 }

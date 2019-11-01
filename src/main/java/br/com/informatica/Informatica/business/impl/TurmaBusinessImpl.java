@@ -27,7 +27,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
 
     @Override
     public Turma findById(int id) {
-        return turmaRepository.findById(id).orElseThrow(() -> new NotFoundException("Turma com id " + id + " Não foi encontrada"));
+        return turmaRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Turma com ID " + id + " Não foi encontrada"));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
         try {
             turmaRepository.deleteById(id);
         } catch (Exception ex) {
-            throw new NotFoundException("Turma com o ID " + id + "Não encontrada");
+            throw new NotFoundException("Erro: Turma com ID " + id + " não encontrada!");
         }
         return null;
     }
@@ -53,7 +53,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
             return turmaRepository.save(turma);
 
         } catch (Exception ex) {
-            throw new NotFoundException("Turma com o ID " + id + "Não encontrada");
+            throw new NotFoundException("Turma com ID " + id + " não encontrada!");
         }
     }
 

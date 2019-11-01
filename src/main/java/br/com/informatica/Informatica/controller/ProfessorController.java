@@ -42,11 +42,8 @@ public class ProfessorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Professor> delete(@PathVariable int id) {
-        try {
-            return professorBusiness.deleteById(id);
-         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        professorBusiness.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")

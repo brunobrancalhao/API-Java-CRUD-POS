@@ -9,6 +9,6 @@ public interface MateriaBusiness {
     Page<Materia> findAll(Pageable pageable);
     Materia findById(int id);
     Materia save(Materia materia);
-    ResponseEntity<Materia> deleteById(int id);
+    void deleteById(int id);
     Materia put(int id, Materia materia);
 }

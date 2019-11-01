@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.CursoBusiness;
+import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Curso;
 import br.com.informatica.Informatica.repository.CursoRepository;
 import br.com.informatica.Informatica.repository.MateriaRepository;
@@ -34,7 +35,7 @@ public class CursoBusinessImpl implements CursoBusiness {
 
     @Override
     public Curso findById(int id) {
-        return cursoRepository.findById(id).get();
+        return cursoRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Curso com ID " + id + " não foi encontrado!"));
     }
 
     @Override
@@ -43,9 +44,9 @@ public class CursoBusinessImpl implements CursoBusiness {
     }
 
     @Override
-    public ResponseEntity<Curso> deleteById(int id) {
+    public void deleteById(int id) {
+        cursoRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Curso com ID " + id + " não foi encontrado!"));
         cursoRepository.deleteById(id);
-        return null;
     }
 
     @Override

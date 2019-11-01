@@ -30,7 +30,7 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
 
     @Override
     public Materia findById(int id) {
-        return materiaRepository.findById(id).get();
+        return materiaRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Matéria com ID " + id + " não foi encontrada!"));
     }
 
     @Override
@@ -44,9 +44,9 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
     }
 
     @Override
-    public ResponseEntity<Materia> deleteById(int id) {
+    public void deleteById(int id) {
+        materiaRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Matéria com ID " + id + " não foi encontrada!"));
         materiaRepository.deleteById(id);
-        return null;
     }
 
     @Override

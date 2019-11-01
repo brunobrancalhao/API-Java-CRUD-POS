@@ -11,6 +11,6 @@ public interface CursoBusiness {
     Page<Curso> findAll(Pageable pageable);
     Curso findById(int id);
     Curso save(Curso curso);
-    ResponseEntity<Curso> deleteById(int id);
+    void deleteById(int id);
     Curso put(int id, Curso curso);
 }
