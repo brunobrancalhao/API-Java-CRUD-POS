@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ public class Professor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String nome;
 
     @OneToOne(mappedBy = "professor")

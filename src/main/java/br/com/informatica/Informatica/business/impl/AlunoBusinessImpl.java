@@ -37,22 +37,6 @@ public class AlunoBusinessImpl implements AlunoBusiness {
         return alunoRepository.findAllByNomeContains(pageable,nome);
     }
 
-    public AlunoRepository getAlunoRepository() {
-        return alunoRepository;
-    }
-
-    public void setAlunoRepository(AlunoRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
-    }
-
-    public TurmaRepository getTurmaRepository() {
-        return turmaRepository;
-    }
-
-    public void setTurmaRepository(TurmaRepository turmaRepository) {
-        this.turmaRepository = turmaRepository;
-    }
-
     @Override
     public Aluno findById(int id) {
         return alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Aluno com ID " + id + " não foi encontrado!"));
