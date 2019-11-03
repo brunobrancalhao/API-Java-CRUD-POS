@@ -45,12 +45,7 @@ public class ProfessorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Professor> put(@PathVariable int id, @RequestBody Professor professor) {
-        Professor info = professorBusiness.put(id, professor);
-
-        if(info == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(info);
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(info);
+        return ResponseEntity.status(HttpStatus.CREATED).body(professorBusiness.put(id, professor));
     }
 
 }

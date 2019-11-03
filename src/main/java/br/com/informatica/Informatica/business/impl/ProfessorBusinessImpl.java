@@ -49,9 +49,8 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
             Professor profe = professorRepository.findById(id).get();
             professor.setId(id);
             return professorRepository.save(professor);
-
         } catch (Exception ex) {
-            return null;
+            throw new NotFoundException("Professor com ID: " + id + " não existe!");
         }
     }
 }
