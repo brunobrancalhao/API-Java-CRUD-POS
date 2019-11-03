@@ -22,7 +22,6 @@ public class TurmaController {
 
     @GetMapping
     public ResponseEntity<Page<Turma>> findAll(@PageableDefault(size=10) Pageable pageable) {
-
         return ResponseEntity.ok().body(turmaBusiness.findAll(pageable));
     }
 
@@ -33,23 +32,17 @@ public class TurmaController {
 
     @PostMapping
     public ResponseEntity<Turma> post(@RequestBody Turma turma) {
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(turmaBusiness.save(turma));
+        return ResponseEntity.status(HttpStatus.CREATED).body(turmaBusiness.save(turma));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Turma> put(@PathVariable int id, @RequestBody Turma turma) {
-        Turma info = turmaBusiness.put(id, turma);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(info);
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(turmaBusiness.put(id, turma));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Turma> delete(@PathVariable int id) {
         return turmaBusiness.deleteById(id);
     }
+
 }

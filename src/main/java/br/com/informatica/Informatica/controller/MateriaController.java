@@ -28,21 +28,12 @@ public class MateriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Materia> find(@PathVariable int id) {
-        Materia mat = materiaBusiness.findById(id);
-
-        if (mat == null) {
-
-        }
-
         return ResponseEntity.ok().body(materiaBusiness.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Materia> post(@RequestBody Materia materia) {
-        Materia info = materiaBusiness.save(materia);
-        return (ResponseEntity<Materia>) ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(info);
+        return ResponseEntity.status(HttpStatus.CREATED).body(materiaBusiness.save(materia));
     }
 
     @PutMapping("/{id}")
@@ -50,12 +41,9 @@ public class MateriaController {
         Materia info = materiaBusiness.put(id, materia);
 
         if(info == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(info);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(info);
         }
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(info);
+        return ResponseEntity.status(HttpStatus.CREATED).body(info);
 
     }
 
@@ -64,7 +52,5 @@ public class MateriaController {
         materiaBusiness.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
-
 
 }

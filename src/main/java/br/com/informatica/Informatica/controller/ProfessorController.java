@@ -34,7 +34,7 @@ public class ProfessorController {
 
     @PostMapping
     public ResponseEntity<Professor> post(@RequestBody Professor professor) {
-        return (ResponseEntity<Professor>) ResponseEntity.status(HttpStatus.CREATED).body(professorBusiness.save(professor));
+        return ResponseEntity.status(HttpStatus.CREATED).body(professorBusiness.save(professor));
     }
 
     @DeleteMapping("/{id}")
@@ -48,13 +48,9 @@ public class ProfessorController {
         Professor info = professorBusiness.put(id, professor);
 
         if(info == null) {
-            return (ResponseEntity<Professor>) ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(info);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(info);
         }
-        return (ResponseEntity<Professor>) ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(info);
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(info);
     }
 
 }

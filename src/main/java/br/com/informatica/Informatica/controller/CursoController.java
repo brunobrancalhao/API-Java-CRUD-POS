@@ -32,9 +32,7 @@ public class CursoController {
 
     @PostMapping
     public ResponseEntity<Curso> post(@RequestBody Curso curso) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(cursoBusiness.save(curso));
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoBusiness.save(curso));
     }
 
     @PutMapping("/{id}")
@@ -42,12 +40,9 @@ public class CursoController {
         Curso info = cursoBusiness.put(id, curso);
 
         if(info == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(info);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(info);
         }
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(info);
+        return ResponseEntity.status(HttpStatus.CREATED).body(info);
     }
 
     @DeleteMapping("/{id}")

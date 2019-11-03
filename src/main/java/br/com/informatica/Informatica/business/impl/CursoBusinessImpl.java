@@ -52,9 +52,9 @@ public class CursoBusinessImpl implements CursoBusiness {
         }
 
         for (Materia m : curso.getMaterias()) {
-            Optional<Curso> ot = cursoRepository.findById(m.getId());
+            Optional<Curso> oc = cursoRepository.findById(m.getId());
 
-            if (ot.equals(Optional.empty())) {
+            if (oc.equals(Optional.empty())) {
                 throw new NotFoundException("Erro: Materia com ID:" + m.getId() + " não existe!");
             }
         }

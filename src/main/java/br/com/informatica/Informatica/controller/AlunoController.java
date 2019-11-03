@@ -25,7 +25,6 @@ public class AlunoController {
 
     @GetMapping
     public ResponseEntity<Page<Aluno>> findAll(@PageableDefault(size=10) Pageable pageable, @RequestParam(required = false) String nome) {
-
         if(nome != null){
             return ResponseEntity.ok().body(alunoBusiness.findAllByNomeContains(pageable,nome));
         } else {
@@ -35,25 +34,17 @@ public class AlunoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Aluno> find(@PathVariable int id) {
-        Aluno alu = alunoBusiness.findById(id);
-
         return ResponseEntity.ok().body(alunoBusiness.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Aluno> post(@RequestBody Aluno aluno) {
-        Aluno info = alunoBusiness.save(aluno);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(info);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alunoBusiness.save(aluno));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Aluno> put(@PathVariable int id, @RequestBody Aluno aluno) {
-        Aluno alu = alunoBusiness.put(id, aluno);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(alu);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alunoBusiness.put(id, aluno));
     }
 
     @DeleteMapping("/{id}")

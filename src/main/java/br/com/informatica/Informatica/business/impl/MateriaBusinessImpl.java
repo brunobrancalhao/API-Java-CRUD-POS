@@ -1,6 +1,7 @@
 package br.com.informatica.Informatica.business.impl;
 
 import br.com.informatica.Informatica.business.MateriaBusiness;
+import br.com.informatica.Informatica.exception.InvalidParamsException;
 import br.com.informatica.Informatica.exception.NotFoundException;
 import br.com.informatica.Informatica.model.Materia;
 import br.com.informatica.Informatica.model.Professor;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class MateriaBusinessImpl  implements MateriaBusiness {
@@ -55,7 +58,6 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
             Materia mat = materiaRepository.findById(id).get();
             materia.setId(id);
             return materiaRepository.save(materia);
-
         } catch (Exception ex) {
             return null;
         }
