@@ -9,6 +9,6 @@ public interface TurmaBusiness {
     Page<Turma> findAll(Pageable pageable);
     Turma findById(int id);
     Turma save(Turma turma);
-    ResponseEntity<Turma> deleteById(int id);
+    void deleteById(int id);
     Turma put(int id, Turma turma);
 }

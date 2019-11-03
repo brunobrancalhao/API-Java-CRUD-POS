@@ -42,7 +42,8 @@ public class TurmaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Turma> delete(@PathVariable int id) {
-        return turmaBusiness.deleteById(id);
+        turmaBusiness.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

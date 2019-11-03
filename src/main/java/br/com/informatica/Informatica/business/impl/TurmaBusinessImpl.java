@@ -36,13 +36,9 @@ public class TurmaBusinessImpl implements TurmaBusiness {
     }
 
     @Override
-    public ResponseEntity<Turma> deleteById(int id) {
-        try {
-            turmaRepository.deleteById(id);
-        } catch (Exception ex) {
-            throw new NotFoundException("Erro: Turma com ID " + id + " não encontrada!");
-        }
-        return null;
+    public void deleteById(int id) {
+        turmaRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro: Turma com ID " + id + " não foi encontrado!"));
+        turmaRepository.deleteById(id);
     }
 
     @Override
@@ -51,9 +47,8 @@ public class TurmaBusinessImpl implements TurmaBusiness {
             Turma tur = turmaRepository.findById(id).get();
             turma.setId(id);
             return turmaRepository.save(turma);
-
         } catch (Exception ex) {
-            throw new NotFoundException("Turma com ID " + id + " não encontrada!");
+            return null;
         }
     }
 
