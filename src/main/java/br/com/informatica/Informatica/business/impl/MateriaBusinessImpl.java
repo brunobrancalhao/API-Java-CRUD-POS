@@ -59,7 +59,7 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
             materia.setId(id);
             return materiaRepository.save(materia);
         } catch (Exception ex) {
-            return null;
+            throw new NotFoundException("Materia com ID: " + id + " não existe");
         }
     }
 }

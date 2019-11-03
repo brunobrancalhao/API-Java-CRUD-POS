@@ -77,7 +77,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
             Optional<Turma> ot = turmaRepository.findById(t.getId());
 
             if (ot.equals(Optional.empty())) {
-                throw new NotFoundException("Erro: Turma id: " + t.getId() + " não existe");
+                throw new NotFoundException("Erro: Turma com ID: " + t.getId() + " não existe!");
             }
         }
 
@@ -85,9 +85,8 @@ public class AlunoBusinessImpl implements AlunoBusiness {
             Aluno alu = alunoRepository.findById(id).get();
             aluno.setId(id);
             return alunoRepository.save(aluno);
-
         } catch (Exception ex) {
-            throw new NotFoundException("Aluno id:" + id + " não existe");
+            throw new NotFoundException("Aluno com ID:" + id + " não existe!");
         }
     }
 }
