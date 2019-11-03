@@ -37,12 +37,7 @@ public class CursoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Curso> put(@PathVariable int id, @RequestBody Curso curso) {
-        Curso info = cursoBusiness.put(id, curso);
-
-        if(info == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(info);
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(info);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoBusiness.put(id, curso));
     }
 
     @DeleteMapping("/{id}")

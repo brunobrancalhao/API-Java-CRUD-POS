@@ -95,6 +95,14 @@ public class CursoBusinessImpl implements CursoBusiness {
             }
         }
 
+        for (Turma t : curso.getTurmas()) {
+            Optional<Curso> ot = cursoRepository.findById(t.getId());
+
+            if (ot.equals(Optional.empty())) {
+                throw new NotFoundException("Erro: Turma com ID:" + t.getId() + " não existe!");
+            }
+        }
+
         try {
             Curso cur = cursoRepository.findById(id).get();
             curso.setId(id);
