@@ -38,12 +38,16 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
 
     @Override
     public Materia save(Materia materia) {
-        try {
-            Professor prof = professorRepository.findById(materia.getProfessor().getId()).get();
-            return materiaRepository.save(materia);
-        } catch (Exception ex) {
-            throw new NotFoundException("Professor " + materia.getProfessor().getId() + " não encontrado");
+
+        if(materia.getProfessor() == null){
+            throw new InvalidParamsException("Erro: Professor é obrigatório!");
         }
+
+        if(!professorRepository.existsById(materia.getProfessor().getId())) {
+            throw new NotFoundException("Erro: Professor com ID: " + materia.getProfessor().getId() + " não existe!");
+        }
+
+        return materiaRepository.save(materia);
     }
 
     @Override
