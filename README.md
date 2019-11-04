@@ -12,3 +12,7 @@
 
 - Documentação da API feita pelo Swagger, arquivo na raiz do projeto com o nome: Modelagem_API.yml
 
+# Alunos:
+
+- André Luis Borges (22290)
+- Bruno Brancalhão (22291)
