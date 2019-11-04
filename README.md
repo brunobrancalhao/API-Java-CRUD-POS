@@ -1,4 +1,4 @@
-# h1 Escola Informática
+# Escola Informática
 
 - Trabalho para avaliação da disciplina de Desenvolvimento Web Rest ETL com Java & Spring
 
