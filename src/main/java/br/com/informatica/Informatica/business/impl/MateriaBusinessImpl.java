@@ -58,6 +58,15 @@ public class MateriaBusinessImpl  implements MateriaBusiness {
 
     @Override
     public Materia put(int id, Materia materia) {
+
+        if(materia.getProfessor() == null){
+            throw new InvalidParamsException("Erro: Professor é obrigatório!");
+        }
+
+        if(!professorRepository.existsById(materia.getProfessor().getId())) {
+            throw new NotFoundException("Erro: Professor com ID: " + materia.getProfessor().getId() + " não existe!");
+        }
+
         try {
             Materia mat = materiaRepository.findById(id).get();
             materia.setId(id);
