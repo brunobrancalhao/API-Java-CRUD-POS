@@ -6,5 +6,7 @@
 
 - Script SQL com inserts: Raíz do projeto, com o nome mockDados.sql
 
+- DER: Raíz do projeto, com o nome DER_BD.png
+
 - Documentação da API feita pelo Swagger, arquivo na raiz do projeto com o nome: Modelagem_API.yml
 
